@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>The Motley Fool! </title>
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+        <link rel="icon" type="image/png" href="img/facvicon.png">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container top-bar">
+            <a href="/" class="btn btn-primary">HOME</a>
+        </div>
+        <div class="container content-inner">
+            <section class="jumbo-card card">
+                <div class="card-image">
+                    {% for image in homepage_article.images %}
+                        <a href="article/{{homepage_article.uuid}}"><img src="{{image.url}}" alt="" class="img-responsive"></a>
+                    {% endfor %}
+                </div>
+                <div class="card-elements">
+                    <div class="card-header">
+                        <a href="article/{{homepage_article.uuid}}"><h3>{{homepage_article.promo}}</h3></a>
+                        <p class="author">{{homepage_article.byline}} | {{homepage_article.publish_at}} </p>
+                    </div>
+                    <div class="card-copy">
+                        <p>{{homepage_article.pitch.text | safe}}</p>
+                    </div>
+                </div>
+            </section>
+           
+            <div class="cards row">
+            {% for article in random_articles %}
+                <div class="card">
+                    <div class="card-image">
+                    {% for image in article.images %}
+                        <a href="article/{{article.uuid}}"><img src="{{image.url}}" alt="" class="img-responsive"></a>
+                    {% endfor %}
+                    </div>
+                    <div class="card-elements">
+                        <div class="card-header">
+                            <a href="article/{{article.uuid}}">
+                                <h4>{{article.promo}}</h4>
+                            </a>
+                            <p class="author">{{article.byline}} | {{article.publish_at}} </p>
+                        </div>
+                        <div class="card-copy">
+                            <p>{{article.pitch.text | safe }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div> 
+        </div>
+        <script src="/static/js/jquery-3.1.1.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>
